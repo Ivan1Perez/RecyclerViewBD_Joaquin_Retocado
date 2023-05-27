@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -112,5 +114,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         hideProgress();
         List<Usuario> usuarioList = Model.getInstance().getUsuarios();
         myRecyclerViewAdapter.setUsuarios(usuarioList);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.exit: finish();
+
+
+            default: return super.onOptionsItemSelected(item);
+        }
     }
 }
